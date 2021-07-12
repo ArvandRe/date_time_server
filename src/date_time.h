@@ -1,0 +1,6 @@
+#include <boost/date_time/local_time/tz_database.hpp>
+#include <optional>
+#include <string>
+#include <string_view>
+
+std::optional<std::string> GetDateTimeWithTz(const boost::local_time::tz_database &tz_db, std::string_view tz_name);
