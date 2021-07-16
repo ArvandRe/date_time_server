@@ -2,6 +2,8 @@
 #include <sstream>
 #include "date_time.h"
 
+namespace DateTime {
+
 std::optional<boost::posix_time::time_duration> GetOffset(const boost::local_time::tz_database &tz_db, std::string_view tz_name) {
 	for (const auto& region : tz_db.region_list()) {
 		const auto tz = tz_db.time_zone_from_region(region);	
@@ -24,4 +26,6 @@ std::optional<std::string> GetDateTimeWithTz(const boost::local_time::tz_databas
 	datetime_tz << date.day_of_week() << ' ' << date.month() << ' ' << date.day() << ' '
 				<< datetime.time_of_day() + offset.value() << ' ' << tz_name << ' ' << date.year();
 	return datetime_tz.str();
+}
+
 }
