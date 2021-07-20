@@ -11,31 +11,31 @@ namespace DateTime {
 
 class Connection {
 public:
-	Connection(tcp::socket &socket, boost::local_time::tz_database &tz_db);
-	awaitable<void> Connect();
+    Connection(tcp::socket &socket, boost::local_time::tz_database &tz_db);
+    awaitable<void> Connect();
 
 private:
-	tcp::socket &socket_;
-	boost::local_time::tz_database &tz_db_;
+    tcp::socket &socket_;
+    boost::local_time::tz_database &tz_db_;
 
-	awaitable<std::string> Read();
-	awaitable<void> Write(const std::string &msg);
+    awaitable<std::string> Read();
+    awaitable<void> Write(const std::string &msg);
 };
 
 class Server {
 public:
-	using Port = boost::asio::ip::port_type;
+    using Port = boost::asio::ip::port_type;
 
-	Server(Port port, const std::string &tz_database_path);
-	void Run();
+    Server(Port port, const std::string &tz_database_path);
+    void Run();
 
 private:
-	boost::asio::io_context context_;
-	Port port_;
-	boost::local_time::tz_database tz_db_;
+    boost::asio::io_context context_;
+    Port port_;
+    boost::local_time::tz_database tz_db_;
 
-	awaitable<void> Listen();
-	awaitable<void> MakeConnection(tcp::socket socket);
+    awaitable<void> Listen();
+    awaitable<void> MakeConnection(tcp::socket socket);
 };
 
-}
+}  // namespace DateTime
