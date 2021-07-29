@@ -33,7 +33,7 @@ awaitable<std::string> Connection::Read() {
     co_return result;
 }
 
-awaitable<void> Connection::Write(const std::string &msg) {
+awaitable<void> Connection::Write(std::string msg) {
     co_await async_write(socket_, boost::asio::const_buffer(msg.c_str(), msg.size()), boost::asio::use_awaitable);
 }
 
